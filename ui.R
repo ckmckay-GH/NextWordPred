@@ -23,7 +23,7 @@ shinyUI(fluidPage(
                         submitButton("PREDICT"),
                         
                         h4("Predicted next word:"),
-                        textOutput("nextWord")
+                        textOutput("wordPred")
                         ),
         
         mainPanel(

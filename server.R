@@ -24,18 +24,18 @@ bad_words <- read.table("~/Coursera/Capstone/NextWordPred/bad-words.txt", header
 
 ## Stop words
 myStopWords <- c("at", "be", "on", "of", "in", "so","the", "and", "with", "that", "from", "into", 
-                 "for", "about", "but", "this", "sothe")
+                 "for", "about", "but", "this", "a", "sothe")
 
-## textClean function
-textClean <- function(text) {
+
+## nextWord function
+nextWord <- function(text) {
         
         ## clean input text
         text <- tolower(text)
         text <- gsub("[[:punct:]]", "", text)
         text <- gsub(pattern="[^[:alpha:]]", " ", text)
-
+        
         ## remove bad words
-        bad_words<- as.character(bad_words$V1)
         pattern <- paste0("\\b(?:", paste(bad_words, collapse = "|"), ")\\b ?")
         text <- gsub(pattern, " fooo4s ", text, perl = TRUE)
         text <- text[!grepl("fooo4s", text)]
@@ -47,13 +47,8 @@ textClean <- function(text) {
         ## cleanup spaces
         text <- gsub(pattern="\\s+", " ", text)
         testString <- gsub("^\\s+|\\s+$", "", text)
+        
         test_words <- wordcount(testString)
-
-        return(testString)
-}
-
-## nextWord function
-nextWord <- function(testString) {
         
         if(test_words > 4) {
                 testString <- tail(strsplit(testString, split=" ")[[1]],4)
@@ -129,33 +124,21 @@ nextWord <- function(testString) {
                 }
         }   
         
-        testAnswer <- gsub("^\\s+|\\s+$", "", testAnswer)
-        return(testAnswer)
-                       
-                       
+        wordPred <- gsub("^\\s+|\\s+$", "", testAnswer)
+        return(wordPred)
 }
 
 # Shiny server next word prediction
 shinyServer(function(input, output) {
    
-        ## Chect for input
-        ## if none, ask for input
-
+        output$wordPred <- renderText({
+                nextWord(input$wordString)
+        })
         
-        ## Clean input
-        textClean <- reactive({
-        
-                text <- input$wordString
-                cleanText(text)
-                output$nextWord <- renderText(testString)
-                
-        }) 
-        
-        ## predict words
-        ##predictWord <- reactive({nextWord(testString)        })
+}) 
         
       
         
-          })
+   
   
 
