@@ -26,6 +26,7 @@ bad_words <- read.table("~/Coursera/Capstone/NextWordPred/bad-words.txt", header
 myStopWords <- c("at", "be", "on", "of", "in", "so","the", "and", "with", "that", "from", "into", 
                  "for", "about", "but", "this", "a", "sothe")
 
+testAnswer <- NULL
 
 ## nextWord function
 nextWord <- function(text) {
