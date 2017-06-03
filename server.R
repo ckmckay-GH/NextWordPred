@@ -10,17 +10,17 @@
 library(shiny)
 library(ngram)
 
-setwd("~/Coursera/Capstone/nextword")
+setwd("~/Coursera/Capstone/NextWordPred")
 
 ## load ngrams
-unigram <- load("unigram.Rda")
-bigram <- load("bigram.Rda")
-trigram <- load("trigram.Rda")
-quadgram <- load("quadgram.Rda")
-quintgram <- load("quintgram.Rda")
+load("~/Coursera/Capstone/NextWordPred/unigram.Rda")
+load("~/Coursera/Capstone/NextWordPred/bigram.Rda")
+load("~/Coursera/Capstone/NextWordPred/trigram.Rda")
+load("~/Coursera/Capstone/NextWordPred/quadgram.Rda")
+load("~/Coursera/Capstone/NextWordPred/quintgram.Rda")
 
 ## load profanity file
-bad_words <- read.table("bad-words.txt", header=FALSE, strip.white=TRUE, skipNul = TRUE)
+bad_words <- read.table("~/Coursera/Capstone/NextWordPred/bad-words.txt", header=FALSE, strip.white=TRUE, skipNul = TRUE)
 
 ## Stop words
 myStopWords <- c("at", "be", "on", "of", "in", "so","the", "and", "with", "that", "from", "into", 
